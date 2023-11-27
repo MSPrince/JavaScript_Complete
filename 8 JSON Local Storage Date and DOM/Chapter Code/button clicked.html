@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Button Counter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    button {
+      font-size: 16px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button.even {
+      background-color: #3498db;
+      color: #fff;
+    }
+
+    button.odd {
+      background-color: #e74c3c;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <button id="main" onclick="clicked()">Click me</button>
+
+  <script>
+    let buttonPressed = parseInt(localStorage.getItem('clickCount')) || 0;
+    let dummyResult = document.getElementById('main');
+
+    function updateButtonAppearance() {
+      // Toggle the class based on whether the click count is odd or even
+      dummyResult.className = buttonPressed % 2 === 0 ? 'even' : 'odd';
+    }
+
+    function updateLocalStorage() {
+      localStorage.setItem('clickCount', buttonPressed.toString());
+    }
+
+    function clicked() {
+      buttonPressed++;
+      dummyResult.innerHTML = buttonPressed;
+      updateButtonAppearance();
+      updateLocalStorage();
+    }
+
+    // Initialize button appearance based on the stored click count
+    updateButtonAppearance();
+  </script>
+</body>
+
+</html>
